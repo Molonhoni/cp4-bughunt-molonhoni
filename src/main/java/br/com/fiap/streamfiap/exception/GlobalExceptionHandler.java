@@ -11,6 +11,11 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(ClassificacaoIndicativaException.class)
+    public ResponseEntity<Map<String, String>> handleClassificacaoIndicativa(ClassificacaoIndicativaException e) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(Map.of("erro", e.getMessage()));
+    }
+
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Map<String, String>> handleArgumentoInvalido(IllegalArgumentException e) {
         return ResponseEntity.badRequest().body(Map.of("erro", e.getMessage()));
